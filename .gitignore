@@ -1,0 +1,6 @@
+.gradle/
+.idea/
+.finalbuilds/
+.architectury-transformer/
+build/
+run/

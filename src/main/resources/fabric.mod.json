@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "selling-bin",
+  "version": "${version}",
+  "name": "Selling Bin",
+  "description": "A block that turns items into different items once a day",
+  "authors": [
+    "BCG Team Joe and V4LK <3"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/selling-bin/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.v4lk.sellingbin.SellingBinMod"
+    ],
+    "client": [
+      "dev.v4lk.sellingbin.client.SellingBinModClient"
+    ]
+  },
+  "mixins": [
+    "selling-bin.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
