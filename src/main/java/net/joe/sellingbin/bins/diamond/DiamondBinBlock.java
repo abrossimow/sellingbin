@@ -1,9 +1,6 @@
-package dev.v4lk.sellingbin.bins.diamond;
+package net.joe.sellingbin.bins.diamond;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -12,20 +9,19 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class DiamondBinBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING;
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    static {
-        FACING = Properties.HORIZONTAL_FACING;
+    public DiamondBinBlock(Settings settings) {
+        super(settings);
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Override
@@ -49,10 +45,6 @@ public class DiamondBinBlock extends BlockWithEntity {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    public DiamondBinBlock(Settings settings) {
-        super(settings);
-    }
-
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new DiamondBinBlockEntity(pos, state);
@@ -67,12 +59,13 @@ public class DiamondBinBlock extends BlockWithEntity {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             DiamondBinBlockEntity diamondBinBlockEntity = (DiamondBinBlockEntity) world.getBlockEntity(pos);
-            diamondBinBlockEntity.sellItems(player);
+            if (diamondBinBlockEntity != null) {
+                diamondBinBlockEntity.sellItems(player);
 
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+                NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+                if (screenHandlerFactory != null) {
+                    player.openHandledScreen(screenHandlerFactory);
+                }
             }
         }
         return ActionResult.SUCCESS;

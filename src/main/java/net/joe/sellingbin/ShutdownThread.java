@@ -1,4 +1,4 @@
-package dev.v4lk.sellingbin;
+package net.joe.sellingbin;
 
 public class ShutdownThread extends Thread {
     @Override

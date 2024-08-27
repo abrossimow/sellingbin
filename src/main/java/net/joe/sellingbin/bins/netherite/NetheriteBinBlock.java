@@ -1,4 +1,4 @@
-package dev.v4lk.sellingbin.bins.iron;
+package net.joe.sellingbin.bins.netherite;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -21,11 +21,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class IronBinBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING;
+public class NetheriteBinBlock extends BlockWithEntity {
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    static {
-        FACING = Properties.HORIZONTAL_FACING;
+    public NetheriteBinBlock(Settings settings) {
+        super(settings);
     }
 
     @Override
@@ -49,13 +49,9 @@ public class IronBinBlock extends BlockWithEntity {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    public IronBinBlock(Settings settings) {
-        super(settings);
-    }
-
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new IronBinBlockEntity(pos, state);
+        return new NetheriteBinBlockEntity(pos, state);
     }
 
     @Override
@@ -66,8 +62,8 @@ public class IronBinBlock extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            IronBinBlockEntity ironBinBlockBlockEntity = (IronBinBlockEntity) world.getBlockEntity(pos);
-            ironBinBlockBlockEntity.sellItems(player);
+            NetheriteBinBlockEntity netheriteBinBlockEntity = (NetheriteBinBlockEntity) world.getBlockEntity(pos);
+            netheriteBinBlockEntity.sellItems(player);
 
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
 

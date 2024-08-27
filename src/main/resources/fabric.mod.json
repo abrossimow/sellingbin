@@ -3,28 +3,24 @@
   "id": "selling-bin",
   "version": "${version}",
   "name": "Selling Bin",
-  "description": "A block that turns items into different items once a day",
-  "authors": [
-    "BCG Team Joe and V4LK <3"
-  ],
+  "description": "A configurable block that automatically sells items placed inside it at midnight",
+  "authors": ["V4LK and Joe"],
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/selling-bin/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.v4lk.sellingbin.SellingBinMod"
+      "net.joe.sellingbin.SellingBinMod"
     ],
     "client": [
-      "dev.v4lk.sellingbin.client.SellingBinModClient"
+      "net.joe.sellingbin.client.SellingBinModClient"
     ]
   },
-  "mixins": [
-    "selling-bin.mixins.json"
-  ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
   }
 }

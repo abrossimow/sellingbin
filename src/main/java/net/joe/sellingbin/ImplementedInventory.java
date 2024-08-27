@@ -1,4 +1,4 @@
-package dev.v4lk.sellingbin;
+package net.joe.sellingbin;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
 public interface ImplementedInventory extends Inventory {
+
     DefaultedList<ItemStack> getItems();
 
     static ImplementedInventory of(DefaultedList<ItemStack> items) {
@@ -21,19 +22,16 @@ public interface ImplementedInventory extends Inventory {
     default int size() {
         return getItems().size();
     }
- 
 
     @Override
     default boolean isEmpty() {
         for (int i = 0; i < size(); i++) {
-            ItemStack stack = getStack(i);
-            if (!stack.isEmpty()) {
+            if (!getStack(i).isEmpty()) {
                 return false;
             }
         }
         return true;
     }
- 
 
     @Override
     default ItemStack getStack(int slot) {
@@ -69,7 +67,7 @@ public interface ImplementedInventory extends Inventory {
 
     @Override
     default void markDirty() {
-
+        // No-op by default
     }
 
     @Override

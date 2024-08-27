@@ -1,9 +1,6 @@
-package dev.v4lk.sellingbin.bins.wooden;
+package net.joe.sellingbin.bins.iron;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -12,20 +9,17 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class WoodenBinBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING;
+public class IronBinBlock extends BlockWithEntity {
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    static {
-        FACING = Properties.HORIZONTAL_FACING;
+    public IronBinBlock(Settings settings) {
+        super(settings);
     }
 
     @Override
@@ -49,13 +43,9 @@ public class WoodenBinBlock extends BlockWithEntity {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    public WoodenBinBlock(Settings settings) {
-        super(settings);
-    }
-
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new WoodenBinBlockEntity(pos, state);
+        return new IronBinBlockEntity(pos, state);
     }
 
     @Override
@@ -66,8 +56,8 @@ public class WoodenBinBlock extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            WoodenBinBlockEntity woodenBinBlockEntity = (WoodenBinBlockEntity) world.getBlockEntity(pos);
-            woodenBinBlockEntity.sellItems(player);
+            IronBinBlockEntity ironBinBlockEntity = (IronBinBlockEntity) world.getBlockEntity(pos);
+            ironBinBlockEntity.sellItems(player);
 
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
 

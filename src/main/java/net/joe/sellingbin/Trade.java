@@ -1,22 +1,18 @@
-package dev.v4lk.sellingbin;
+package net.joe.sellingbin;
 
-import net.minecraft.client.gui.tooltip.TooltipComponent;
-import net.minecraft.client.item.TooltipData;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-public class Trade{
+public class Trade {
     private String name;
     private String currency;
     private int sellPrice;
     private int sellAmount;
-    private String color = Integer.toString(Formatting.DARK_GRAY.getColorIndex(),16).toUpperCase();
+    private String color = Integer.toHexString(Formatting.DARK_GRAY.getColorIndex()).toUpperCase();
     private static final String DEFAULT_COLOR = "FF555555";
+
     public String getName() {
         return name;
     }
@@ -50,12 +46,14 @@ public class Trade{
     }
 
     public int getColor() {
-            if(this.color.equals("8"))
-                this.color = DEFAULT_COLOR;
-            return Integer.parseUnsignedInt(this.color,16);
+        if (this.color.equals("8")) {
+            this.color = DEFAULT_COLOR;
+        }
+        return Integer.parseUnsignedInt(this.color, 16);
     }
+
     public void setColor(int color) {
-        this.color = Integer.toHexString(color);
+        this.color = Integer.toHexString(color).toUpperCase();
     }
 
     public boolean matches(ItemStack stack) {
