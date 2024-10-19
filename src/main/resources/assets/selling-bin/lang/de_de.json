@@ -2,6 +2,6 @@
   "block.selling-bin.wooden_bin": "Holzverkaufskorb",
   "block.selling-bin.iron_bin": "Eisenverkaufskorb",
   "block.selling-bin.diamond_bin": "Diamantverkaufskorb",
-  "block.selling-bin.netherite_bin":"Netheriteverkaufskorb",
+  "block.selling-bin.netherite_bin":"Netheritverkaufskorb",
   "selling-bin.tooltip.sell": "Verkaufe §f%sx§r für §f%sx§r §f§l%s"
 }
